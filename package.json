@@ -1,7 +1,7 @@
 {
-  "name": "nextly-template",
+  "name": "Smart Hiring Platform",
   "version": "2.0.0",
-  "description": "Nextly Landing Page Template",
+  "description": "A smart platform for efficient hiring processes",
   "private": true,
   "scripts": {
     "dev": "next dev",

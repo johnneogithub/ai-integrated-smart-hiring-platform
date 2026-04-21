@@ -1,24 +1,23 @@
-import { Container } from "@/components/Container";
-import { Hero } from "@/components/Hero";
-import { SectionTitle } from "@/components/SectionTitle";
-import { Benefits } from "@/components/Benefits";
-import { Video } from "@/components/Video";
-import { Testimonials } from "@/components/Testimonials";
-import { Faq } from "@/components/Faq";
-import { Cta } from "@/components/Cta";
+import { Container } from "@/landing/Container";
+import { Hero } from "@/landing/Hero";
+import { SectionTitle } from "@/landing/SectionTitle";
+import { Benefits } from "@/landing/Benefits";
+import { Video } from "@/landing/Video";
+import { Testimonials } from "@/landing/Testimonials";
+import { Faq } from "@/landing/Faq";
+import { Cta } from "@/landing/Cta";
 
-import { benefitOne, benefitTwo } from "@/components/data";
+import { benefitOne, benefitTwo } from "@/landing/data";
 export default function Home() {
   return (
     <Container>
       <Hero />
       <SectionTitle
-        preTitle="Nextly Benefits"
-        title=" Why should you use this landing page"
+        preTitle="Smart Hiring Platform"
+        title=" Why should you choose us?"
       >
-        Nextly is a free landing page & marketing website template for startups
-        and indie projects. Its built with Next.js & TailwindCSS. And its
-        completely open-source.
+        Smart Hiring Platform is an AI-driven hiring platform that helps you to find the best candidates for your job. 
+        We use AI to analyze the candidates and provide you with the best match for your job. 
       </SectionTitle>
 
       <Benefits data={benefitOne} />
@@ -28,9 +27,7 @@ export default function Home() {
         preTitle="Watch a video"
         title="Learn how to fullfil your needs"
       >
-        This section is to highlight a promo or demo video of your product.
-        Analysts says a landing page with video has 3% more conversion rate. So,
-        don&apos;t forget to add one. Just like this.
+        Grow your business with our AI-driven hiring platform. Watch the video to learn how to find the best candidates for your job and save time and money.
       </SectionTitle>
 
       <Video videoId="fZ0D0cnR88E" />
@@ -39,15 +36,13 @@ export default function Home() {
         preTitle="Testimonials"
         title="Here's what our customers said"
       >
-        Testimonials is a great way to increase the brand trust and awareness.
-        Use this section to highlight your popular customers.
+        Some of the testimonials from our customers who have used our platform to find the best candidates for their jobs. We are proud to have helped them to grow their business and find the best talent for their team.
       </SectionTitle>
 
       <Testimonials />
 
       <SectionTitle preTitle="FAQ" title="Frequently Asked Questions">
-        Answer your customers possible questions here, it will increase the
-        conversion rate as well as support or chat requests.
+        Questions about our platform? We are here to help you. If you have any questions, please feel free to contact us. We will be happy to answer your questions and help you to find the best candidates for your job.
       </SectionTitle>
 
       <Faq />
