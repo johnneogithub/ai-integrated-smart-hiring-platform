@@ -61,42 +61,6 @@ AI-INTEGRATED-SMART-HIRING/
 
 ---
 
-## 🧩 Setup
-
-### Install Dependencies
-
-```bash
-npm install
-```
-
-### Run Development Server
-
-```bash
-git clone https://github.com/surjithctly/nextly-template.git
-```
-
-### 2\. Navigate to the directory
-
-```
-cd nextly-template
-```
-
-### 3\. Install dependencies
-
-```
-yarn install
-# or
-npm install
-```
-
-### 5\. Run Dev Server
-
-```
-yarn dev
-# or
-npm run dev
-```
-
 ## Deploy with Vercel
 
 Deploy this template using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
@@ -106,11 +70,8 @@ Deploy this template using [Vercel](https://vercel.com?utm_source=github&utm_med
 
 ## Author
 
-Surjith S M ( [@surjithctly](https://surjithctly.in/) )
+John Neo Lopez
 
----
-
-[![image](https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg)](https://vercel.com/?utm_source=web3templates&utm_campaign=oss)
 
 
 
