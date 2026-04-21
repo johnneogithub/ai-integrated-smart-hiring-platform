@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Container } from "../components/Container";
-import heroImg from "../../public/img/hero.png";
+import heroImg from "../../public/img/hero2.png";
 import Link from "next/link";
 
 export const Hero = () => {
@@ -18,8 +18,8 @@ export const Hero = () => {
 
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
             <Link
-              href="/onboarding"
-              className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition">
+              href="/start"
+              className="px-8 py-4 text-lg font-medium text-center text-white bg-blue-600 rounded-md hover:bg-blue-700 transition">
               Get Started!
             </Link>
             </div>

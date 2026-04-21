@@ -2,7 +2,10 @@
 
 export type FormData = {
   // Personal Information
-  fullName: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  nickname?: string;
   age: string;
   sex: string;
   preferredGender: string;

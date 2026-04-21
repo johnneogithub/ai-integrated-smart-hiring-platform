@@ -18,27 +18,17 @@ export const Navbar = () => {
       <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-1">
         {/* Logo  */}
         <Link href="/">
-          <span className="flex items-center space-x-2 text-2xl font-medium text-orange-500 dark:text-gray-100">
-                <Image
-                  src="/img/smart-hiring-platform-logo.svg"
-                  width="32"
-                  alt="N"
-                  height="32"
-                  className="w-8"
-                />
+          <span className="flex items-center space-x-2 text-2xl font-medium text-blue-600 dark:text-gray-100">
+              <Image
+                src="/smart-hiring-platform-logo.png"
+                alt="Smart Hiring Logo"
+                width={100}
+                height={100}
+                className="w-22 h-22"
+              />
             <span>Smart Hiring Platform</span>
           </span>
         </Link>
-
-        {/* get started  */}
-        <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2">
-            <ThemeChanger />
-            <div className="hidden mr-3 lg:flex nav__item">
-              <Link href="/" className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5">
-                Get Started
-              </Link>
-            </div>
-        </div>
                 
         <Disclosure>
           {({ open }) => (

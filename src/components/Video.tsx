@@ -13,7 +13,7 @@ export function Video({ videoId }: Readonly<VideoProps>) {
 
   return (
     <Container>
-      <div className="relative w-full h-[500px] max-w-4xl mx-auto overflow-hidden lg:mb-20 rounded-2xl bg-indigo-300 cursor-pointer bg-gradient-to-tr from-purple-400 to-indigo-700">
+      <div className="relative w-full h-[500px] max-w-4xl mx-auto overflow-hidden lg:mb-20 rounded-2xl bg-blue-300 cursor-pointer bg-gradient-to-tr from-blue-400 to-indigo-700">
         {!playVideo && (
           <button
             onClick={() => setPlayVideo(!playVideo)}
@@ -35,12 +35,18 @@ export function Video({ videoId }: Readonly<VideoProps>) {
           </button>
         )}
         {playVideo && (
-          <iframe
-            src={`https://www.youtube-nocookie.com/embed/${videoId}?controls=0&autoplay=1`}
-            title="Logistics Video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            className="w-full h-full aspect-video"
-          ></iframe>
+          <div className="w-full h-full aspect-video">
+            <video
+              src="/vid/logistics-stock-video.mp4"   
+              controls
+              autoPlay
+              muted
+              loop
+              className="w-full h-full object-cover rounded-lg"
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
         )}
       </div>
     </Container>

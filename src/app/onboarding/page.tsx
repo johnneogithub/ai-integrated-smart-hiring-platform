@@ -13,8 +13,10 @@ export default function OnboardingPage() {
   const totalSteps = 3;
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  // Load saved profile from localStorage
+
+  // Load saved profile from localStorage (for editing/resume)
   useEffect(() => {
     const saved = localStorage.getItem("workerProfile");
     if (saved) {
@@ -25,6 +27,7 @@ export default function OnboardingPage() {
       }
     }
   }, []);
+
 
   // Handle input changes
   const handleChange = (
@@ -151,6 +154,11 @@ export default function OnboardingPage() {
           )}
         </div>
       </div>
+          {showSuccess && (
+            <div className="mb-6 rounded-xl bg-green-50 border border-green-200 p-4 text-green-800">
+              Profile saved successfully! Finding your best job matches…
+            </div>
+          )}
     </main>
   );
 }

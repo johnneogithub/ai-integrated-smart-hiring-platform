@@ -1,12 +1,16 @@
-// app/job-matches/page.tsx
-
 "use client";
 
 import { useState, useEffect } from "react";
-import { mockJobs, getMatchedJobs, JobListing } from "@/data/mockJobs";
+import {
+  mockJobs,
+  getMatchedJobs,
+  getJobById,
+  JobListing,
+} from "@/data/mockJobs";
 import { JobCard } from "@/components/jobs/JobCard";
 import { JobModal } from "@/components/jobs/JobModal";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function JobMatchesPage() {
   const [jobs, setJobs] = useState<JobListing[]>(mockJobs);
@@ -14,16 +18,18 @@ export default function JobMatchesPage() {
   const [workerProfile, setWorkerProfile] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const searchParams = useSearchParams();
+
   // Load worker profile and calculate matches
   useEffect(() => {
     const saved = localStorage.getItem("workerProfile");
+
     if (saved) {
       try {
         const profile = JSON.parse(saved);
         setWorkerProfile(profile);
 
-        // Get matched jobs based on profile
-        const matchedJobs = getMatchedJobs(profile, 6);
+        const matchedJobs = getMatchedJobs(profile, 12);
         setJobs(matchedJobs as JobListing[]);
       } catch (error) {
         console.error("Failed to load profile:", error);
@@ -32,14 +38,26 @@ export default function JobMatchesPage() {
     } else {
       setJobs(mockJobs);
     }
+
     setIsLoading(false);
   }, []);
+
+  // Open job modal via ?job=job-id
+  useEffect(() => {
+    const jobId = searchParams.get("job");
+    if (!jobId) return;
+
+    const job = getJobById(jobId);
+    if (job) {
+      setSelectedJob(job);
+    }
+  }, [searchParams]);
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="text-center">
-          <div className="animate-spin h-12 w-12 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <div className="animate-spin h-12 w-12 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4" />
           <p className="text-gray-600">Loading job matches...</p>
         </div>
       </div>
@@ -104,7 +122,7 @@ export default function JobMatchesPage() {
           )}
         </div>
 
-        {/* Jobs Grid - 3 Cards Per Row */}
+        {/* Jobs Grid */}
         {jobs.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {jobs.map((job) => (
@@ -128,52 +146,14 @@ export default function JobMatchesPage() {
             </Link>
           </div>
         )}
-
-        {/* Info Section */}
-        <div className="mt-16 rounded-lg bg-white p-8 shadow-sm">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            How AI Matching Works
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <div className="mb-3 h-12 w-12 rounded-lg bg-blue-100 flex items-center justify-center">
-                <span className="text-xl font-bold text-blue-600">1</span>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Profile Analysis
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Your experience, skills, and preferences are analyzed
-              </p>
-            </div>
-            <div>
-              <div className="mb-3 h-12 w-12 rounded-lg bg-blue-100 flex items-center justify-center">
-                <span className="text-xl font-bold text-blue-600">2</span>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Job Evaluation
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Each job is scored based on requirements and fit
-              </p>
-            </div>
-            <div>
-              <div className="mb-3 h-12 w-12 rounded-lg bg-blue-100 flex items-center justify-center">
-                <span className="text-xl font-bold text-blue-600">3</span>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Smart Recommendations
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Top matches are shown with explanations
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Job Detail Modal */}
-      <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />
+      <JobModal
+        job={selectedJob}
+        onClose={() => setSelectedJob(null)}
+      />
     </main>
   );
 }
+``

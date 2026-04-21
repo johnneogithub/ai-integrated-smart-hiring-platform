@@ -16,13 +16,40 @@ export function Step1Personal({ formData, onChange }: Step1PersonalProps) {
       <h2 className="text-xl font-semibold text-gray-900">Personal Information</h2>
 
       {/* Full Name */}
-      <input
-        name="fullName"
-        placeholder="Full Name"
-        className={inputClass}
-        value={formData.fullName}
-        onChange={onChange}
-      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <input
+          name="firstName"
+          placeholder="First Name"
+          className={inputClass}
+          value={formData.firstName}
+          onChange={onChange}
+        />
+
+        <input
+          name="middleName"
+          placeholder="Middle Name (Optional)"
+          className={inputClass}
+          value={formData.middleName}
+          onChange={onChange}
+        />
+
+        <input
+          name="lastName"
+          placeholder="Last Name"
+          className={inputClass}
+          value={formData.lastName}
+          onChange={onChange}
+        />
+
+        <input
+          name="nickname"
+          placeholder="Nickname (How should we call you?)"
+          className={inputClass}
+          value={formData.nickname}
+          onChange={onChange}
+        />
+      </div>
+
 
       {/* Age & Sex Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

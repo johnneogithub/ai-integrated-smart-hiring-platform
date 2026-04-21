@@ -374,6 +374,268 @@ export const mockJobs: JobListing[] = [
     postedDate: "2024-04-10",
     applicationsOpen: true,
   },
+  {
+  id: "job-007",
+  title: "Dispatch Operations Coordinator",
+  company: "BlueRoute Freight Systems",
+  description:
+    "Entry-level role supporting daily dispatch operations, coordinating drivers, routes, and delivery schedules.",
+  fullDescription: `
+    BlueRoute Freight Systems is expanding its dispatch team and is seeking a motivated Dispatch Operations Coordinator.
+
+    **What You'll Do:**
+    • Assist with daily route assignments
+    • Communicate with drivers regarding schedules and delays
+    • Track shipments and update delivery statuses
+    • Escalate issues to senior dispatchers
+    • Maintain dispatch and trip records
+
+    **Ideal Background:**
+    • 1 to 2 years logistics or transportation experience
+    • Strong communication skills
+    • Comfortable with dispatch software or spreadsheets
+    • Ability to multitask in a fast-paced environment
+
+    **Why Join Us:**
+    • Great entry point into logistics
+    • Structured training provided
+    • Opportunity for advancement to Dispatcher
+    • Supportive team environment
+  `,
+  employmentType: "Full-time",
+  salaryMin: 22,
+  salaryMax: 30,
+  salaryType: "hour",
+  location: "Jacksonville, FL",
+  distance: 0,
+  requirements: [
+    "1+ year logistics experience",
+    "Strong communication",
+    "Basic computer skills",
+  ],
+  benefits: ["Health Insurance", "Paid Training", "Career Growth"],
+  postedDate: "2024-04-12",
+  applicationsOpen: true,
+},
+{
+  id: "job-008",
+  title: "Fleet Maintenance Coordinator",
+  company: "HighwayLink Transport",
+  description:
+    "Support fleet maintenance scheduling, documentation, and coordination with mechanics and drivers.",
+  fullDescription: `
+    HighwayLink Transport is hiring a Fleet Maintenance Coordinator to assist in keeping our fleet running safely and efficiently.
+
+    **Responsibilities:**
+    • Schedule preventative maintenance
+    • Track repair records and compliance documents
+    • Coordinate vehicle downtime with operations
+    • Communicate maintenance status to dispatch
+    • Assist with DOT audit preparation
+
+    **What We're Looking For:**
+    • 2 to 3 years experience in fleet, logistics, or maintenance coordination
+    • Familiarity with basic DOT requirements
+    • Organized and detail-oriented mindset
+
+    **What We Offer:**
+    • Stable weekday schedule
+    • Hands-on logistics and fleet exposure
+    • Long-term career opportunities
+  `,
+  employmentType: "Full-time",
+  salaryMin: 24,
+  salaryMax: 34,
+  salaryType: "hour",
+  location: "Memphis, TN",
+  distance: 0,
+  requirements: [
+    "2+ years fleet or logistics experience",
+    "DOT knowledge (basic)",
+    "Strong organizational skills",
+  ],
+  benefits: ["Medical", "Paid Time Off", "401(k)"],
+  postedDate: "2024-04-14",
+  applicationsOpen: true,
+},
+{
+  id: "job-009",
+  title: "Logistics Analyst (Junior)",
+  company: "CargoFlow Analytics",
+  description:
+    "Analyze shipment data and operational metrics to support logistics planning and optimization initiatives.",
+  fullDescription: `
+    CargoFlow Analytics is hiring a Junior Logistics Analyst to support data-driven decision making within supply chain operations.
+
+    **Key Duties:**
+    • Analyze shipment and delivery metrics
+    • Build basic reports and dashboards
+    • Identify trends and inefficiencies
+    • Support senior analysts on optimization projects
+
+    **Preferred Qualifications:**
+    • 1 to 3 years logistics or operations experience
+    • Strong Excel or Google Sheets skills
+    • Basic understanding of logistics KPIs
+    • Analytical mindset
+
+    **Why CargoFlow:**
+    • Entry-level analytics experience
+    • Training and mentorship
+    • Exposure to enterprise logistics operations
+  `,
+  employmentType: "Full-time",
+  salaryMin: 26,
+  salaryMax: 38,
+  salaryType: "hour",
+  location: "Chicago, IL",
+  distance: 0,
+  requirements: [
+    "Analytical skills",
+    "Excel proficiency",
+    "Logistics knowledge (basic)",
+  ],
+  benefits: ["Hybrid Work", "Health Insurance", "Annual Bonus"],
+  postedDate: "2024-04-16",
+  applicationsOpen: true,
+},
+{
+  id: "job-010",
+  title: "Transportation Operations Specialist",
+  company: "MetroLine Logistics",
+  description:
+    "Support daily transportation operations including scheduling, load tracking, and carrier communication.",
+  fullDescription: `
+    MetroLine Logistics is looking for a Transportation Operations Specialist to support our growing regional operations.
+
+    **Responsibilities Include:**
+    • Monitor active shipments and ETAs
+    • Coordinate with third-party carriers
+    • Resolve delivery exceptions
+    • Maintain operational documentation
+    • Support continuous improvement initiatives
+
+    **Qualifications:**
+    • 2 to 4 years transportation or logistics experience
+    • Familiarity with TMS platforms a plus
+    • Strong problem-solving skills
+
+    **What We Offer:**
+    • Fast-growing organization
+    • Exposure to multi-state operations
+    • Clear advancement pathways
+  `,
+  employmentType: "Full-time",
+  salaryMin: 25,
+  salaryMax: 36,
+  salaryType: "hour",
+  location: "Dallas, TX",
+  distance: 0,
+  requirements: [
+    "Transportation experience",
+    "Problem-solving skills",
+    "Communication skills",
+  ],
+  benefits: ["Medical Coverage", "Paid Holidays", "Growth Opportunities"],
+  postedDate: "2024-04-18",
+  applicationsOpen: true,
+},
+{
+  id: "job-011",
+  title: "Supply Chain Coordinator",
+  company: "EastGate Distribution Services",
+  description:
+    "Coordinate inbound and outbound logistics, vendors, and inventory movements across distribution centers.",
+  fullDescription: `
+    EastGate Distribution Services is seeking a Supply Chain Coordinator to support day-to-day supply chain execution.
+
+    **Key Responsibilities:**
+    • Coordinate inbound freight and outbound shipments
+    • Communicate with suppliers and carriers
+    • Track inventory movement and order fulfillment
+    • Assist with supply chain documentation
+    • Support process improvement initiatives
+
+    **Requirements:**
+    • 2 to 3 years supply chain or logistics experience
+    • Strong organizational skills
+    • Comfortable working with vendors and internal teams
+
+    **Why EastGate:**
+    • Stable supply chain role
+    • Team-focused culture
+    • Growth into senior supply chain roles
+  `,
+  employmentType: "Full-time",
+  salaryMin: 23,
+  salaryMax: 35,
+  salaryType: "hour",
+  location: "Savannah, GA",
+  distance: 0,
+  requirements: [
+    "Supply chain experience",
+    "Vendor coordination",
+    "Strong communication skills",
+  ],
+  benefits: ["Health Benefits", "Paid Time Off", "Training Programs"],
+  postedDate: "2024-04-20",
+  applicationsOpen: true,
+},
+{
+  id: "job-012",
+  title: "Warehouse Support Associate (No Experience Required)",
+  company: "NorthGate Logistics Services",
+  description:
+    "Entry-level warehouse support role for individuals eager to learn logistics operations. Training provided. No prior experience required.",
+  fullDescription: `
+    NorthGate Logistics Services is hiring Warehouse Support Associates to join our growing fulfillment and distribution team.
+
+    This role is designed for individuals who are new to logistics or looking to start a stable career path in warehouse and supply chain operations.
+
+    **What You’ll Do:**
+    • Assist with loading and unloading shipments
+    • Organize inventory within the warehouse
+    • Support order picking and packing
+    • Maintain a clean and safe work environment
+    • Learn warehouse systems and processes
+
+    **Who This Role Is For:**
+    • No previous warehouse experience required
+    • Individuals willing to learn and follow instructions
+    • Reliable, punctual team players
+    • Physically able to stand and move for extended periods
+
+    **Training & Growth:**
+    • On-the-job training provided
+    • Opportunities to move into inventory, forklift, or team lead roles
+    • Hands-on exposure to logistics operations
+
+    **Why Join NorthGate:**
+    • Entry-level friendly environment
+    • Steady work hours
+    • Supportive team culture
+    • Clear advancement opportunities
+  `,
+  employmentType: "Full-time",
+  salaryMin: 16,
+  salaryMax: 20,
+  salaryType: "hour",
+  location: "Columbus, OH",
+  distance: 0,
+  requirements: [
+    "Willingness to learn",
+    "Basic reliability and attendance",
+    "Ability to follow instructions",
+  ],
+  benefits: [
+    "Paid Training",
+    "Health Insurance",
+    "Paid Time Off",
+    "Career Advancement Opportunities",
+  ],
+  postedDate: "2024-04-22",
+  applicationsOpen: true,
+},
 ];
 
 /**
