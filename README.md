@@ -72,160 +72,46 @@ npm install
 ### Run Development Server
 
 ```bash
+git clone https://github.com/surjithctly/nextly-template.git
+```
+
+### 2\. Navigate to the directory
+
+```
+cd nextly-template
+```
+
+### 3\. Install dependencies
+
+```
+yarn install
+# or
+npm install
+```
+
+### 5\. Run Dev Server
+
+```
+yarn dev
+# or
 npm run dev
 ```
 
-Then open:
+## Deploy with Vercel
 
-```text
-http://localhost:3000
-```
+Deploy this template using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
 
-in your browser.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/surjithctly/nextly-template&project-name=nextly-template&repository-name=nextly-template)
 
----
 
-## 🖼 Assets
+## Author
 
-### Logo
-
-```text
-/public/img/smart-hiring-platform-logo.png
-```
-
-### Video
-
-```text
-/public/vid/logistics-stock-video.mp4
-```
-
-### Favicon
-
-```text
-/public/favicon.ico
-```
+Surjith S M ( [@surjithctly](https://surjithctly.in/) )
 
 ---
 
-## 🧠 Development Guide
+[![image](https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg)](https://vercel.com/?utm_source=web3templates&utm_campaign=oss)
 
-## 1. Adding New Job Listings
 
-Edit:
 
-```text
-src/components/data/mockJobs.ts
-```
-
-Follow the existing JSON format for job entries:
-
-```ts
-{
-  id: "job-007",
-  title: "Warehouse Operations Lead",
-  company: "Global Freight Logistics",
-  location: "Dallas, TX",
-  salaryMin: 40,
-  salaryMax: 55,
-  salaryType: "hour",
-  employmentType: "Full-time",
-  requirements: [
-    "3+ yrs logistics",
-    "forklift certification",
-    "inventory management"
-  ]
-}
-```
-
----
-
-## 2. Connecting the Claude API
-
-Configure your API key inside:
-
-```text
-.env.local
-```
-
-Example:
-
-```env
-ANTHROPIC_API_KEY=your_api_key_here
-NEXT_PUBLIC_AGENT_ID=your_agent_id_here
-NEXT_PUBLIC_API_URL=http://localhost:3000
-```
-
-The integration logic lives in:
-
-```text
-src/components/services/claudeApi.ts
-```
-
----
-
-## 3. Managing Environment Variables
-
-- Use `.env.local` for local development
-- Never commit secrets to GitHub
-- Keep API keys private and secure
-
----
-
-## 🔮 Future Enhancements
-
-| Feature | Description |
-|---|---|
-| Backend Integration | Add a Node.js or Laravel backend for persistent job listings, user data, and analytics |
-| User Authentication | Implement secure login/signup using NextAuth or Firebase Auth |
-| Resume Uploader | Allow users to upload resumes (PDF/DOCX) for AI parsing |
-| AI Resume Insights | Claude analyzes resumes and suggests improvements |
-| Admin Dashboard | Manage job listings, monitor AI matches, and view analytics |
-| Database Support | Integrate PostgreSQL or MongoDB for scalable data storage |
-| Email Notifications | Send automated job match summaries to users |
-
----
-
-## 🧾 License
-
-This project is licensed under the **MIT License** — feel free to use, modify, and distribute with attribution.
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-
-```bash
-git checkout -b feature/new-feature
-```
-
-3. Commit your changes
-
-```bash
-git commit -m "Add new feature"
-```
-
-4. Push to the branch
-
-```bash
-git push origin feature/new-feature
-```
-
-5. Open a Pull Request
-
----
-
-## ✨ Portfolio Ready
-
-This project is designed to be investor-ready, demo-friendly, and suitable for portfolio presentation. It showcases:
-
-- AI integration in real-world hiring workflows
-- Strong frontend architecture using Next.js App Router
-- Practical logistics and supply-chain domain knowledge
-- Career-focused conversational UX powered by Claude AI
-
----
-
-Built with passion for smarter hiring and better career matching.
 
