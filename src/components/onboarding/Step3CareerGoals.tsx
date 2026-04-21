@@ -36,7 +36,7 @@ export function Step3CareerGoals({ formData, onChange }: Step3CareerGoalsProps) 
       {/* Salary Expectation */}
       <input
         name="salaryExpectation"
-        placeholder="Salary Expectation (e.g., $50,000 - $60,000)"
+        placeholder="Yearly Salary Expectation (e.g., $20,000 - $60,000)"
         className={inputClass}
         value={formData.salaryExpectation}
         onChange={onChange}
