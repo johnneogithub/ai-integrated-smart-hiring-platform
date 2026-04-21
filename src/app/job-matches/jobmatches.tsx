@@ -63,37 +63,56 @@ export default function JobMatches() {
 console.log("Mock jobs:", mockJobs);
 
   return (
-    <main className="min-h-screen bg-gray-100 py-12">
-    <div className="mx-auto max-w-7xl px-6">
-        {jobs.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {jobs.map((job) => (
-            <JobCard
-                key={job.id}
-                job={job}
-                onViewDetails={setSelectedJob}
-            />
-            ))}
-        </div>
-        ) : (
-        <div className="rounded-lg bg-white p-12 text-center shadow-sm">
-            <p className="text-gray-600 text-lg mb-4">
-            No job matches found. Try updating your profile.
-            </p>
-            <Link
-            href="/onboarding"
-            className="inline-block rounded-lg bg-blue-600 px-6 py-2 text-white hover:bg-blue-700"
-            >
-            Update Profile
-            </Link>
-        </div>
-        )}
+<main className="min-h-screen bg-gray-100 py-12">
+  <div className="mx-auto max-w-7xl px-6">
+    <div className="mb-12 flex items-center justify-between">
+      <div>
+        <h1 className="text-4xl font-bold text-gray-900">
+          Your Job Matches
+        </h1>
+        <p className="mt-2 text-lg text-gray-600">
+          AI-powered recommendations based on your profile
+        </p>
+      </div>
+      <Link
+        href="/career-agent"
+        className="rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white hover:bg-indigo-700 transition"
+      >
+        Chat with Career Agent
+      </Link>
     </div>
 
-    {selectedJob && (
-        <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />
+    {/* Jobs Grid */}
+    {jobs.length > 0 ? (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {jobs.map((job) => (
+          <JobCard
+            key={job.id}
+            job={job}
+            onViewDetails={setSelectedJob}
+          />
+        ))}
+      </div>
+    ) : (
+      <div className="rounded-lg bg-white p-12 text-center shadow-sm">
+        <p className="text-gray-600 text-lg mb-4">
+          No job matches found. Try updating your profile.
+        </p>
+        <Link
+          href="/onboarding"
+          className="inline-block rounded-lg bg-blue-600 px-6 py-2 text-white hover:bg-blue-700"
+        >
+          Update Profile
+        </Link>
+      </div>
     )}
-    </main>
+  </div>
+
+  {selectedJob && (
+    <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />
+  )}
+</main>
+
 
   );
 }
