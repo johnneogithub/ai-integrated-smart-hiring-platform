@@ -50,52 +50,90 @@ export function Step1Personal({ formData, onChange }: Step1PersonalProps) {
         />
       </div>
 
+  {/* Age & Sex Row */}
+  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div>
+      <label
+        htmlFor="age"
+        className="mb-2 block text-sm font-medium text-gray-700"
+      >
+        Age
+      </label>
+      <input
+        id="age"
+        name="age"
+        type="number"
+        className={inputClass}
+        value={formData.age}
+        onChange={onChange}
+        aria-label="Age"
+        title="Age"
+      />
+    </div>
 
-      {/* Age & Sex Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <input
-          name="age"
-          type="number"
-          placeholder="Age"
-          className={inputClass}
-          value={formData.age}
-          onChange={onChange}
-        />
-        <select
-          name="sex"
-          className={inputClass}
-          value={formData.sex}
-          onChange={onChange}
-        >
-          <option value="">Select Sex</option>
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
-        </select>
-      </div>
+    <div>
+      <label
+        htmlFor="sex"
+        className="mb-2 block text-sm font-medium text-gray-700"
+      >
+        Sex
+      </label>
+      <select
+        id="sex"
+        name="sex"
+        className={inputClass}
+        value={formData.sex}
+        onChange={onChange}
+        aria-label="Sex"
+        title="Sex"
+      >
+        <option value="">Select Sex</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+  </div>
 
-      {/* Preferred Gender & Birthdate Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <input
-          name="preferredGender"
-          placeholder="Preferred Gender (Optional)"
-          className={inputClass}
-          value={formData.preferredGender}
-          onChange={onChange}
-        />
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Date of Birth
-          </label>
-          <input
-            type="date"
-            name="birthdate"
-            className={inputClass}
-            value={formData.birthdate}
-            onChange={onChange}
-          />
-        </div>
-      </div>
+  {/* Preferred Gender & Birthdate Row */}
+  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div>
+      <label
+        htmlFor="preferredGender"
+        className="mb-2 block text-sm font-medium text-gray-700"
+      >
+        Preferred Gender (Optional)
+      </label>
+      <input
+        id="preferredGender"
+        name="preferredGender"
+        className={inputClass}
+        value={formData.preferredGender}
+        onChange={onChange}
+        aria-label="Preferred Gender"
+        title="Preferred Gender"
+      />
+    </div>
+
+    <div>
+      <label
+        htmlFor="birthdate"
+        className="mb-2 block text-sm font-medium text-gray-700"
+      >
+        Date of Birth
+      </label>
+      <input
+        id="birthdate"
+        type="date"
+        name="birthdate"
+        className={inputClass}
+        value={formData.birthdate}
+        onChange={onChange}
+        aria-label="Date of Birth"
+        title="Date of Birth"
+      />
+    </div>
+  </div>
 
       {/* Current Address */}
       <div>

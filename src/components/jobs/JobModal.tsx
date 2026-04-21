@@ -65,7 +65,10 @@ export function JobModal({ job, onClose }: JobModalProps) {
       <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white shadow-2xl">
         {/* Close Button */}
         <button
+          type="button"
           onClick={onClose}
+          aria-label="Close modal"
+          title="Close modal"
           className="sticky top-4 right-4 z-10 ml-auto block rounded-full bg-white p-2 hover:bg-gray-100"
         >
           <X className="h-6 w-6 text-gray-600" />

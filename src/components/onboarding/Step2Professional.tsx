@@ -56,6 +56,8 @@ export function Step2Professional({ formData, onChange }: Step2ProfessionalProps
           className={inputClass}
           value={formData.cdlType}
           onChange={onChange}
+          aria-label="CDL Type"
+          title="CDL Type"
         >
           <option value="">Select CDL Type</option>
           <option>Class A</option>
@@ -66,22 +68,34 @@ export function Step2Professional({ formData, onChange }: Step2ProfessionalProps
 
       {/* Certifications */}
       <div>
-        <label className="block text-sm font-semibold text-gray-900 mb-3">
+        <label className="mb-3 block text-sm font-semibold text-gray-900">
           Certifications & Endorsements
         </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {certifications.map(([name, label]) => (
-            <select
-              key={name}
-              name={name}
-              className={inputClass}
-              value={(formData as any)[name]}
-              onChange={onChange}
-            >
-              <option value="">{label}</option>
-              <option>Yes</option>
-              <option>No</option>
-            </select>
+            <div key={name}>
+              <label
+                htmlFor={name}
+                className="mb-1 block text-sm font-medium text-gray-700"
+              >
+                {label}
+              </label>
+
+              <select
+                id={name}
+                name={name}
+                className={inputClass}
+                value={(formData as any)[name]}
+                onChange={onChange}
+                aria-label={label}
+                title={label}
+              >
+                <option value="">Select {label}</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
           ))}
         </div>
       </div>

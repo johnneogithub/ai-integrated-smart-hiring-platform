@@ -44,7 +44,7 @@ export default function CareerAgentPage() {
   const hasValid = isValidProfile(profile);
   const displayName = hasValid ? getDisplayName(profile) : "there";
 
-  /* ✅ Scroll + focus when new chat starts */
+  /* Scroll + focus when new chat starts */
   useEffect(() => {
     if (!shouldScrollToInput) return;
 
@@ -316,7 +316,11 @@ What would you like to learn about?`.trim(),
             className="flex-1 rounded border px-3 py-2"
             placeholder="Ask about your career…"
           />
-          <button className="bg-blue-600 px-4 text-white">
+          <button
+            type="submit"
+            aria-label="Send message"
+            className="rounded bg-blue-600 px-4 text-white"
+          >
             <Send className="h-5 w-5" />
           </button>
         </form>

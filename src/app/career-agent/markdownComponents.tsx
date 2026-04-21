@@ -1,8 +1,16 @@
 "use client";
 
-import { Components } from "react-markdown";
+import type { Components } from "react-markdown";
 import { getJobById } from "@/data/mockJobs";
 import { JobCard } from "@/components/chat/JobCard";
+
+type CodeProps = {
+  inline?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+  node?: any;
+  [key: string]: any;
+};
 
 export const markdownComponents: Components = {
   h1: ({ children }) => (
@@ -21,7 +29,7 @@ export const markdownComponents: Components = {
     <li className="leading-relaxed">{children}</li>
   ),
 
-  code({ inline, className, children }) {
+  code: ({ inline, className, children, ...props }: CodeProps) => {
     /* Job card fence: ```job */
     if (className === "language-job") {
       const jobId = String(children).trim();
@@ -48,16 +56,19 @@ export const markdownComponents: Components = {
       );
     }
 
-    /* Inline code: `example` */
+    /* Inline code */
     if (inline) {
       return (
-        <code className="rounded bg-gray-200 px-1 text-sm font-mono">
+        <code
+          className="rounded bg-gray-200 px-1 text-sm font-mono"
+          {...props}
+        >
           {children}
         </code>
       );
     }
 
-    /* Real code blocks (rare in your app) */
+    /* Normal code block */
     return (
       <pre className="mt-3 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-gray-100">
         <code>{children}</code>
@@ -65,4 +76,3 @@ export const markdownComponents: Components = {
     );
   },
 };
-``
