@@ -1,13 +1,13 @@
-import { Container } from "@/landing/Container";
-import { Hero } from "@/landing/Hero";
-import { SectionTitle } from "@/landing/SectionTitle";
-import { Benefits } from "@/landing/Benefits";
-import { Video } from "@/landing/Video";
-import { Testimonials } from "@/landing/Testimonials";
-import { Faq } from "@/landing/Faq";
-import { Cta } from "@/landing/Cta";
+import { Container } from "@/components/Container";
+import { Hero } from "@/components/Hero";
+import { SectionTitle } from "@/components/SectionTitle";
+import { Benefits } from "@/components/Benefits";
+import { Video } from "@/components/Video";
+import { Testimonials } from "@/components/Testimonials";
+import { Faq } from "@/components/Faq";
+import { Cta } from "@/components/Cta";
 
-import { benefitOne, benefitTwo } from "@/landing/data";
+import { benefitOne, benefitTwo } from "@/components/data";
 export default function Home() {
   return (
     <Container>

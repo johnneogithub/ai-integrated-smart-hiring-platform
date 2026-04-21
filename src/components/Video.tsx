@@ -37,7 +37,7 @@ export function Video({ videoId }: Readonly<VideoProps>) {
         {playVideo && (
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${videoId}?controls=0&autoplay=1`}
-            title="YouTube video player"
+            title="Logistics Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             className="w-full h-full aspect-video"
           ></iframe>
