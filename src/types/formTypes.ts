@@ -43,7 +43,10 @@ export type FormData = {
 
 export const initialFormData: FormData = {
   // Personal Information
-  fullName: "",
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  nickname: "",
   age: "",
   sex: "",
   preferredGender: "",
@@ -56,6 +59,7 @@ export const initialFormData: FormData = {
   birthAddressCity: "",
   birthAddressState: "",
   birthAddressZip: "",
+
 
   // Professional Driver Profile
   currentRole: "",

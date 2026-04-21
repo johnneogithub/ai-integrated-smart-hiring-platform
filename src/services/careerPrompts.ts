@@ -1,6 +1,7 @@
 // services/careerPrompts.ts
 
-import { FormData } from "@/types/formTypes";
+import { getDisplayName } from "@/utils/profileUtils";
+import type { FormData } from "@/types/formTypes";
 import { JobListing } from "@/data/mockJobs";
 
 /**
@@ -10,7 +11,7 @@ export function getCareerAgentSystemPrompt(profile: FormData): string {
   return `You are an intelligent Career Agent AI assistant specialized in helping logistics and transportation workers advance their careers.
 
 **CANDIDATE PROFILE:**
-- Name: ${profile.fullName || "Candidate"}
+- Name: ${profile ? getDisplayName(profile) : "Candidate"}
 - Current Role: ${profile.currentRole || "Not specified"}
 - Years of Experience: ${profile.yearsExperience || "0"} years
 - Location: ${profile.currentAddressCity}, ${profile.currentAddressState}
@@ -65,7 +66,7 @@ export function getProfileAnalysisPrompt(profile: FormData): string {
   return `Analyze this logistics worker's profile and provide a comprehensive career summary:
 
 **CANDIDATE:**
-- Name: ${profile.fullName}
+- Name: ${profile ? getDisplayName(profile) : "Candidate"}
 - Experience: ${profile.yearsExperience} years as a ${profile.currentRole}
 - Location: ${profile.currentAddressCity}, ${profile.currentAddressState}
 - Goal: Transition to ${profile.desiredPosition}
