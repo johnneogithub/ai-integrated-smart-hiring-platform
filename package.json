@@ -1,5 +1,5 @@
 {
-  "name": "Smart Hiring Platform",
+  "name": "ai-integrated-smart-hiring-platform",
   "version": "2.0.0",
   "description": "A smart platform for efficient hiring processes",
   "private": true,
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/web3templates/nextly-template"
+    "url": "https://github.com/johnneogithub/ai-integrated-smart-hiring-platform"
   },
   "keywords": [
     "nextjs",
     "tailwindcss",
     "free"
   ],
-  "author": "Surjith S M",
+  "author": "John Neo Lopez",
   "license": "ISC",
   "dependencies": {
     "@headlessui/react": "^2.0.3",
