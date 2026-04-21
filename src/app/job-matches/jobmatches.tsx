@@ -21,26 +21,23 @@ export default function JobMatches() {
   const searchParams = useSearchParams();
   const filter = searchParams.get("filter");
 
-  useEffect(() => {
+    useEffect(() => {
     const saved = localStorage.getItem("workerProfile");
-
     if (saved) {
-      try {
+        try {
         const profile = JSON.parse(saved);
         setWorkerProfile(profile);
-
         const matchedJobs = getMatchedJobs(profile, 12);
-        setJobs(matchedJobs as JobListing[]);
-      } catch (error) {
-        console.error("Failed to load profile:", error);
+        setJobs(matchedJobs.length ? matchedJobs : mockJobs); //
+        } catch {
         setJobs(mockJobs);
-      }
+        }
     } else {
-      setJobs(mockJobs);
+        setJobs(mockJobs); // 
     }
-
     setIsLoading(false);
-  }, []);
+    }, []);
+
 
   useEffect(() => {
     const jobId = searchParams.get("job");
@@ -63,10 +60,40 @@ export default function JobMatches() {
     );
   }
 
+console.log("Mock jobs:", mockJobs);
+
   return (
     <main className="min-h-screen bg-gray-100 py-12">
-      {/* ... your existing JSX ... */}
-      <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />
+    <div className="mx-auto max-w-7xl px-6">
+        {jobs.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {jobs.map((job) => (
+            <JobCard
+                key={job.id}
+                job={job}
+                onViewDetails={setSelectedJob}
+            />
+            ))}
+        </div>
+        ) : (
+        <div className="rounded-lg bg-white p-12 text-center shadow-sm">
+            <p className="text-gray-600 text-lg mb-4">
+            No job matches found. Try updating your profile.
+            </p>
+            <Link
+            href="/onboarding"
+            className="inline-block rounded-lg bg-blue-600 px-6 py-2 text-white hover:bg-blue-700"
+            >
+            Update Profile
+            </Link>
+        </div>
+        )}
+    </div>
+
+    {selectedJob && (
+        <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />
+    )}
     </main>
+
   );
 }
