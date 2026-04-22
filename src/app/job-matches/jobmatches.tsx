@@ -81,6 +81,54 @@ console.log("Mock jobs:", mockJobs);
         Chat with Career Agent
       </Link>
     </div>
+    
+    {/* Profile Summary */}
+    {workerProfile && (
+      <div className="mb-8 rounded-xl bg-white border p-6 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="space-y-1">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Your Profile Summary
+            </h2>
+
+            <p className="text-sm text-gray-600">
+              {workerProfile.nickname ||
+                workerProfile.firstName ||
+                "Candidate"}
+              {workerProfile.lastName ? ` ${workerProfile.lastName}` : ""}
+            </p>
+
+            <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1 text-sm text-gray-700">
+              <div>
+                <span className="font-medium">Desired Role:</span>{" "}
+                {workerProfile.desiredPosition || "Not specified"}
+              </div>
+
+              <div>
+                <span className="font-medium">Experience:</span>{" "}
+                {workerProfile.yearsExperience || "0"} years
+              </div>
+
+              <div>
+                <span className="font-medium">Location:</span>{" "}
+                {workerProfile.currentAddressCity && workerProfile.currentAddressState
+                  ? `${workerProfile.currentAddressCity}, ${workerProfile.currentAddressState}`
+                  : "Not specified"}
+              </div>
+            </div>
+          </div>
+
+          <Link
+            href="/onboarding"
+            className="inline-flex items-center justify-center rounded-lg
+                      border border-blue-600 px-4 py-2 text-sm font-medium
+                      text-blue-600 hover:bg-blue-50 transition"
+          >
+            Edit Profile
+          </Link>
+        </div>
+      </div>
+    )}
 
     {/* Jobs Grid */}
     {jobs.length > 0 ? (

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Briefcase, UserPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 
-/** ✅ semantic profile validation */
+/** semantic profile validation */
 const isValidProfile = (raw: string | null): boolean => {
   if (!raw) return false;
 
@@ -42,7 +42,7 @@ export default function StartPage() {
 
   return (
     <main className="min-h-[80vh] bg-gray-100 flex items-center justify-center px-6">
-      <div className="max-w-4xl w-full">
+      <div className="max-w-6xl w-full">
         {/* Header */}
         <div className="text-center mb-6">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
@@ -54,7 +54,7 @@ export default function StartPage() {
         </div>
 
         {/* Choice Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
           {/* Career Agent */}
           <Link
             href="/career-agent"
@@ -87,7 +87,7 @@ export default function StartPage() {
               )}
 
               {!hasProfile && (
-                <p className="mt-4 text-sm text-gray-500">
+                <p className="mt-4 text-sm text-gray-800">
                   ⚠ Create a profile first for best results
                 </p>
               )}
@@ -134,6 +134,34 @@ export default function StartPage() {
               Get started →
             </p>
           </Link>
+
+          {/* Available Jobs */}
+          <Link
+            href="/job-matches"
+            className="group rounded-3xl bg-white p-8 flex flex-col justify-between
+                      transition-all border shadow-sm border-gray-200
+                      hover:border-indigo-500 hover:shadow-md"
+          >
+            <div>
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-100">
+                <Briefcase className="h-7 w-7 text-indigo-600" />
+              </div>
+
+              <h2 className="text-2xl font-bold text-gray-900">
+                Browse Available Jobs
+              </h2>
+
+              <p className="mt-3 text-gray-600 leading-relaxed">
+                🚛 View all open logistics and supply‑chain roles, including entry‑level,
+                warehouse, and professional positions — no profile required. 
+              </p>
+            </div>
+
+            <p className="mt-8 text-indigo-600 font-medium group-hover:underline">
+              View jobs →
+            </p>
+          </Link>
+
         </div>
       </div>
     </main>

@@ -25,7 +25,7 @@ const certifications = [
 export function Step2Professional({ formData, onChange }: Step2ProfessionalProps) {
   return (
     <section className="space-y-6">
-      <h2 className="text-xl font-semibold text-gray-900">Professional Driver Profile</h2>
+      <h2 className="text-xl font-semibold text-gray-900">Your Professional Driver Profile and Experience</h2>
 
       {/* Current Role & Years Experience */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

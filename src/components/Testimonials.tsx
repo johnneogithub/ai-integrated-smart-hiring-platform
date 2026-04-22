@@ -2,9 +2,9 @@ import Image from "next/image";
 import React from "react";
 import { Container } from "@/components/Container";
 
-import userOneImg from "../../public/img/user1.jpg";
+import userOneImg from "../../public/img/user4.png";
 import userTwoImg from "../../public/img/user2.jpg";
-import userThreeImg from "../../public/img/user3.jpg";
+import userThreeImg from "../../public/img/user5.png";
 
 export const Testimonials = () => {
   return (
@@ -19,8 +19,8 @@ export const Testimonials = () => {
 
             <Avatar
               image={userOneImg}
-              name="Sarah Steiner"
-              title="Driver"
+              name="Lalisha Calledo"
+              title="Dispatcher"
             />
           </div>
         </div>
@@ -47,7 +47,7 @@ export const Testimonials = () => {
 
             <Avatar
               image={userThreeImg}
-              name="Gabrielle Winn"
+              name="Jordana Morados"
               title="Logistics Coordinator"
             />
           </div>
@@ -66,11 +66,11 @@ interface AvatarProps {
 function Avatar(props: Readonly<AvatarProps>) {
   return (
     <div className="flex items-center mt-8 space-x-3">
-      <div className="flex-shrink-0 overflow-hidden rounded-full w-14 h-14">
+      <div className="flex-shrink-0 overflow-hidden rounded-full w-14 h-13">
         <Image
           src={props.image}
-          width="40"
-          height="40"
+          width="70"
+          height="70"
           alt="Avatar"
           placeholder="blur"
         />

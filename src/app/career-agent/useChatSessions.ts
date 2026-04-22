@@ -1,152 +1,208 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { FormData } from "@/types/formTypes";
+import type { ChatSession, Message } from "@/types/chatTypes";
 import { getMatchedJobs, JobListing } from "@/data/mockJobs";
+import {
+  loadSessions,
+  saveSessions,
+  getActiveSessionId,
+  setActiveSessionId,
+  clearAllSessions,
+} from "@/utils/chatStorage";
+import { FormData } from "@/types/formTypes";
+import { isValidProfile, getDisplayName } from "@/utils/profileUtils";
+import { formatChatTitle } from "@/utils/chatTitle";
 
-export interface Message {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-  timestamp: string;
-}
+/* Predefined AI welcome message (single source of truth) */
+const createWelcomeMessage = (
+  mode: "guest" | "profile",
+  displayName = "there"
+): Message => ({
+  id: crypto.randomUUID(),
+  role: "assistant",
+  timestamp: new Date().toISOString(),
+  content:
+    mode === "profile"
+      ? `👋 Hi ${displayName}! I'm **Career Agent AI**.
 
-export interface ChatSession {
-  id: string;
-  title: string;
-  createdAt: string;
-  messages: Message[];
-}
+I can help you:
+- Discover job matches
+- Explain why roles fit you
+- Prepare for interviews
+- Plan your next career move
 
-const CHAT_SESSIONS_KEY = "careerAgentChatSessions";
-const ACTIVE_SESSION_KEY = "careerAgentActiveSession";
+What would you like to explore today?`
+      : `👋 Hi there! I'm **Career Agent AI**.
+
+I can help you:
+- Learn about logistics and trucking careers
+- Understand certifications and requirements
+- Explore salary ranges
+- See example roles
+
+Create a profile anytime for **personalized job recommendations**.
+
+What would you like to learn about?`,
+});
 
 export function useChatSessions() {
   const [profile, setProfile] = useState<FormData | null>(null);
   const [matchedJobs, setMatchedJobs] = useState<JobListing[]>([]);
+
   const [sessions, setSessions] = useState<ChatSession[]>([]);
-  const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
+  const [activeSessionId, setActiveSessionIdState] = useState<string | null>(
+    null
+  );
   const [messages, setMessages] = useState<Message[]>([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [shouldScrollToInput, setShouldScrollToInput] = useState(false);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // ---------- bootstrap ----------
+  const mode: "guest" | "profile" = isValidProfile(profile)
+    ? "profile"
+    : "guest";
+
+  /* Bootstrap: load profile + sessions ONCE */
   useEffect(() => {
+    // Load profile
     const savedProfile = localStorage.getItem("workerProfile");
-    if (!savedProfile) return;
+    let displayName = "there";
 
-    const parsedProfile = JSON.parse(savedProfile);
-    setProfile(parsedProfile);
-    setMatchedJobs(getMatchedJobs(parsedProfile, 6));
-
-    const storedSessions = sessionStorage.getItem(CHAT_SESSIONS_KEY);
-    const storedActive = sessionStorage.getItem(ACTIVE_SESSION_KEY);
-
-    if (storedSessions) {
-      const parsed: ChatSession[] = JSON.parse(storedSessions);
-      setSessions(parsed);
-
-      const active =
-        parsed.find((s) => s.id === storedActive) ?? parsed[0];
-
-      setActiveSessionId(active.id);
-      setMessages(active.messages);
-    } else {
-      const initialSession: ChatSession = {
-        id: crypto.randomUUID(),
-        title: "New Conversation",
-        createdAt: new Date().toISOString(),
-        messages: [
-          {
-            id: crypto.randomUUID(),
-            role: "assistant",
-            timestamp: new Date().toISOString(),
-            content: `👋 Hello ${parsedProfile.fullName}!\n\nHow can I help you today?`,
-          },
-        ],
-      };
-
-      setSessions([initialSession]);
-      setActiveSessionId(initialSession.id);
-      setMessages(initialSession.messages);
+    if (savedProfile) {
+      const parsed = JSON.parse(savedProfile);
+      setProfile(parsed);
+      setMatchedJobs(getMatchedJobs(parsed, 6));
+      displayName = getDisplayName(parsed);
     }
+
+    // Load sessions
+    const storedSessions = loadSessions();
+    const storedActiveId = getActiveSessionId();
+
+    if (storedSessions.length > 0) {
+      const active =
+        storedSessions.find((s) => s.id === storedActiveId) ??
+        storedSessions[0];
+
+      setSessions(storedSessions);
+      setActiveSessionIdState(active.id);
+      setMessages(active.messages);
+      return;
+    }
+
+    // No sessions → create first session with welcome message
+    const firstSession: ChatSession = {
+      id: crypto.randomUUID(),
+      title: "New Conversation",
+      mode,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      messages: [createWelcomeMessage(mode, displayName)],
+    };
+
+    setSessions([firstSession]);
+    setActiveSessionIdState(firstSession.id);
+    setActiveSessionId(firstSession.id);
+    setMessages(firstSession.messages);
   }, []);
 
-  // ---------- persist sessions ----------
+  /* Persist active session whenever messages change */
   useEffect(() => {
     if (!activeSessionId) return;
 
     setSessions((prev) => {
       const updated = prev.map((s) =>
-        s.id === activeSessionId ? { ...s, messages } : s
+        s.id === activeSessionId
+          ? { ...s, messages, updatedAt: Date.now() }
+          : s
       );
 
-      sessionStorage.setItem(
-        CHAT_SESSIONS_KEY,
-        JSON.stringify(updated)
-      );
-      sessionStorage.setItem(ACTIVE_SESSION_KEY, activeSessionId);
-
+      saveSessions(updated);
       return updated;
     });
   }, [messages, activeSessionId]);
 
-  // ---------- auto scroll ----------
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  /* Start a new chat (with predefined AI message) */
+  const newChat = () => {
+    const displayName = profile ? getDisplayName(profile) : "there";
 
-  // ---------- handlers ----------
-    const newChat = () => {
     const session: ChatSession = {
-        id: crypto.randomUUID(),
-        title: "New Conversation",
-        createdAt: new Date().toISOString(),
-        messages: [],
+      id: crypto.randomUUID(),
+      title: formatChatTitle(Date.now()),
+      mode,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      messages: [createWelcomeMessage(mode, displayName)],
     };
 
-    setSessions((prev) => [session, ...prev]);
+    setSessions((prev) => {
+      const updated = [session, ...prev].slice(0, 5); // max 3
+      saveSessions(updated);
+      return updated;
+    });
+
+    setActiveSessionIdState(session.id);
     setActiveSessionId(session.id);
-    setMessages([]);
+    setMessages(session.messages);
+    setShouldScrollToInput(false); // do NOT scroll on welcome
+  };
 
-    // tell React what we want to do next
-    setShouldScrollToInput(true);
-    };
+  /* Switch between existing sessions */
+  const openSession = (id: string) => {
+    const s = sessions.find((x) => x.id === id);
+    if (!s) return;
 
-    const clearChat = () => {
-        setMessages([
-        {
-            id: crypto.randomUUID(),
-            role: "assistant",
-            timestamp: new Date().toISOString(),
-            content: "Conversation cleared. How can I help you next?",
-        },
-        ]);
-    };
+    setActiveSessionIdState(id);
+    setActiveSessionId(id);
+    setMessages(s.messages);
+  };
 
-    const resetProfile = () => {
-        if (!confirm("Reset profile and all chats?")) return;
-        localStorage.clear();
-        sessionStorage.clear();
-        window.location.href = "/onboarding";
-    };
+  /* Delete sessions (single or bulk) */
+  const deleteSessions = (ids: string[]) => {
+    setSessions((prev) => {
+      const updated = prev.filter((s) => !ids.includes(s.id));
+      saveSessions(updated);
+
+      if (ids.includes(activeSessionId!)) {
+        const next = updated[0];
+        setActiveSessionIdState(next?.id ?? null);
+        setMessages(next?.messages ?? []);
+      }
+
+      return updated;
+    });
+  };
+
+  /* Hard reset (profile + all chats) */
+  const resetProfile = () => {
+    if (!confirm("Reset profile and all chats?")) return;
+    localStorage.clear();
+    clearAllSessions();
+    window.location.href = "/onboarding";
+  };
 
   return {
     profile,
     matchedJobs,
+
+    sessions,
+    activeSessionId,
     messages,
     setMessages,
+
+    newChat,
+    openSession,
+    deleteSessions,
+    resetProfile,
+
     isLoading,
     setIsLoading,
-    newChat,
-    clearChat,
-    resetProfile,
+
     messagesEndRef,
-    
     shouldScrollToInput,
     setShouldScrollToInput,
-
   };
 }
-``

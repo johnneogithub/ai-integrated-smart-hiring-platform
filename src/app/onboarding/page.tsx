@@ -52,6 +52,16 @@ export default function OnboardingPage() {
     }
   };
 
+  const handleGoToCareerAgent = () => {
+  localStorage.setItem("workerProfile", JSON.stringify(formData));
+  window.location.href = "/career-agent";
+};
+
+const handleGoToJobMatches = () => {
+  localStorage.setItem("workerProfile", JSON.stringify(formData));
+  window.location.href = "/job-matches";
+};
+
   // Save profile and redirect
   const handleComplete = async () => {
     setIsLoading(true);
@@ -125,35 +135,65 @@ export default function OnboardingPage() {
         </div>
       </div>
 
-      {/* Navigation Footer */}
-      <div className="fixed bottom-0 left-0 right-0 border-t bg-white p-5 shadow-lg">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-6">
-          <button
-            onClick={handlePrevious}
-            disabled={step === 1}
-            className="rounded-xl border border-gray-300 px-6 py-3 font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40 transition"
-          >
-            Previous
-          </button>
+          {/* Navigation Footer */}
+          <div className="fixed bottom-0 left-0 right-0 border-t bg-white p-5 shadow-lg">
+            <div className="mx-auto max-w-3xl px-6 space-y-4">
 
-          {step < totalSteps ? (
-            <button
-              onClick={handleNext}
-              className="rounded-xl bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700 transition"
-            >
-              Next
-            </button>
-          ) : (
-            <button
-              onClick={handleComplete}
-              disabled={isLoading}
-              className="rounded-xl bg-green-600 px-8 py-3 font-medium text-white hover:bg-green-700 disabled:opacity-50 transition"
-            >
-              {isLoading ? "Saving..." : "Complete Profile"}
-            </button>
-          )}
-        </div>
-      </div>
+              {/* 🔹 Optional quick actions */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  onClick={handleGoToCareerAgent}
+                  className="flex-1 rounded-xl border border-indigo-300 bg-indigo-50 px-6 py-3
+                            font-medium text-indigo-700 hover:bg-indigo-100 transition"
+                >
+                  🤖 Talk to Career Agent AI
+                </button>
+
+                <button
+                  onClick={handleGoToJobMatches}
+                  className="flex-1 rounded-xl border border-blue-300 bg-blue-50 px-6 py-3
+                            font-medium text-blue-700 hover:bg-blue-100 transition"
+                >
+                  💼 View Job Matches
+                </button>
+              </div>
+
+              {/* 🔹 Primary step navigation */}
+              <div className="flex items-center justify-between">
+
+                <button
+                  onClick={handlePrevious}
+                  disabled={step === 1}
+                  className="rounded-xl border border-gray-300 px-6 py-3
+                            font-medium text-gray-700 hover:bg-gray-50
+                            disabled:cursor-not-allowed disabled:opacity-40 transition"
+                >
+                  Previous
+                </button>
+
+                {step < totalSteps ? (
+                  <button
+                    onClick={handleNext}
+                    className="rounded-xl bg-blue-600 px-8 py-3
+                              font-medium text-white hover:bg-blue-700 transition"
+                  >
+                    Next
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleComplete}
+                    disabled={isLoading}
+                    className="rounded-xl bg-green-600 px-8 py-3
+                              font-medium text-white hover:bg-green-700
+                              disabled:opacity-50 transition"
+                  >
+                    {isLoading ? "Saving..." : "Complete Profile"}
+                  </button>
+                )}
+              </div>
+
+            </div>
+          </div>
           {showSuccess && (
             <div className="mb-6 rounded-xl bg-green-50 border border-green-200 p-4 text-green-800">
               Profile saved successfully! Finding your best job matches…
