@@ -7,6 +7,7 @@ import { FormData, initialFormData } from "@/types/formTypes";
 import { Step1Personal } from "@/components/onboarding/Step1Personal";
 import { Step2Professional } from "@/components/onboarding/Step2Professional";
 import { Step3CareerGoals } from "@/components/onboarding/Step3CareerGoals";
+import ModeSwitcher from "@/components/navigation/ModeSwitcher";
 
 export default function OnboardingPage() {
   const [step, setStep] = useState(1);
@@ -89,116 +90,119 @@ const handleGoToJobMatches = () => {
   const progress = Math.round((step / totalSteps) * 100);
 
   return (
-    <main className="min-h-screen bg-gray-100 pb-32">
-      <div className="mx-auto max-w-3xl px-6 py-10">
-        {/* Header */}
-        <div className="mb-8 rounded-2xl bg-white p-6 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-            Smart Hiring Platform
-          </p>
-          <h1 className="mt-2 text-3xl font-bold text-gray-900">
-            Logistics Driver Application Profile
-          </h1>
-          <p className="mt-2 text-gray-600">
-            Complete your professional profile for AI-driven application analysis
-            and candidate matching.
-          </p>
+    <>
+      <ModeSwitcher/>
+        <main className="min-h-screen bg-gray-100 pb-32">
+          <div className="mx-auto max-w-3xl px-6 py-10">
+            {/* Header */}
+            <div className="mb-8 rounded-2xl bg-white p-6 shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                Smart Hiring Platform
+              </p>
+              <h1 className="mt-2 text-3xl font-bold text-gray-900">
+                Logistics Driver Application Profile
+              </h1>
+              <p className="mt-2 text-gray-600">
+                Complete your professional profile for AI-driven application analysis
+                and candidate matching.
+              </p>
 
-          {/* Progress Bar */}
-          <div className="mt-6">
-            <div className="mb-2 flex items-center justify-between text-sm text-gray-600">
-              <span>
-                Step {step} of {totalSteps}
-              </span>
-              <span className="font-medium">{progress}%</span>
+              {/* Progress Bar */}
+              <div className="mt-6">
+                <div className="mb-2 flex items-center justify-between text-sm text-gray-600">
+                  <span>
+                    Step {step} of {totalSteps}
+                  </span>
+                  <span className="font-medium">{progress}%</span>
+                </div>
+                <div className="h-2 rounded-full bg-gray-200">
+                  <div
+                    className="h-2 rounded-full bg-blue-600 transition-all duration-300"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="h-2 rounded-full bg-gray-200">
-              <div
-                className="h-2 rounded-full bg-blue-600 transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              />
+
+            {/* Form Content */}
+            <div className="rounded-2xl bg-white p-8 shadow-sm">
+              {step === 1 && (
+                <Step1Personal formData={formData} onChange={handleChange} />
+              )}
+              {step === 2 && (
+                <Step2Professional formData={formData} onChange={handleChange} />
+              )}
+              {step === 3 && (
+                <Step3CareerGoals formData={formData} onChange={handleChange} />
+              )}
             </div>
           </div>
-        </div>
 
-        {/* Form Content */}
-        <div className="rounded-2xl bg-white p-8 shadow-sm">
-          {step === 1 && (
-            <Step1Personal formData={formData} onChange={handleChange} />
-          )}
-          {step === 2 && (
-            <Step2Professional formData={formData} onChange={handleChange} />
-          )}
-          {step === 3 && (
-            <Step3CareerGoals formData={formData} onChange={handleChange} />
-          )}
-        </div>
-      </div>
+              {/* Navigation Footer */}
+              <div className="fixed bottom-0 left-0 right-0 border-t bg-white p-5 shadow-lg">
+                <div className="mx-auto max-w-3xl px-6 space-y-4">
 
-          {/* Navigation Footer */}
-          <div className="fixed bottom-0 left-0 right-0 border-t bg-white p-5 shadow-lg">
-            <div className="mx-auto max-w-3xl px-6 space-y-4">
+                  {/* 🔹 Optional quick actions */}
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <button
+                      onClick={handleGoToCareerAgent}
+                      className="flex-1 rounded-xl border border-indigo-300 bg-indigo-50 px-6 py-3
+                                font-medium text-indigo-700 hover:bg-indigo-100 transition"
+                    >
+                      🤖 Talk to Career Agent AI
+                    </button>
 
-              {/* 🔹 Optional quick actions */}
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button
-                  onClick={handleGoToCareerAgent}
-                  className="flex-1 rounded-xl border border-indigo-300 bg-indigo-50 px-6 py-3
-                            font-medium text-indigo-700 hover:bg-indigo-100 transition"
-                >
-                  🤖 Talk to Career Agent AI
-                </button>
+                    <button
+                      onClick={handleGoToJobMatches}
+                      className="flex-1 rounded-xl border border-blue-300 bg-blue-50 px-6 py-3
+                                font-medium text-blue-700 hover:bg-blue-100 transition"
+                    >
+                      💼 View Job Matches
+                    </button>
+                  </div>
 
-                <button
-                  onClick={handleGoToJobMatches}
-                  className="flex-1 rounded-xl border border-blue-300 bg-blue-50 px-6 py-3
-                            font-medium text-blue-700 hover:bg-blue-100 transition"
-                >
-                  💼 View Job Matches
-                </button>
+                  {/* 🔹 Primary step navigation */}
+                  <div className="flex items-center justify-between">
+
+                    <button
+                      onClick={handlePrevious}
+                      disabled={step === 1}
+                      className="rounded-xl border border-gray-300 px-6 py-3
+                                font-medium text-gray-700 hover:bg-gray-50
+                                disabled:cursor-not-allowed disabled:opacity-40 transition"
+                    >
+                      Previous
+                    </button>
+
+                    {step < totalSteps ? (
+                      <button
+                        onClick={handleNext}
+                        className="rounded-xl bg-blue-600 px-8 py-3
+                                  font-medium text-white hover:bg-blue-700 transition"
+                      >
+                        Next
+                      </button>
+                    ) : (
+                      <button
+                        onClick={handleComplete}
+                        disabled={isLoading}
+                        className="rounded-xl bg-green-600 px-8 py-3
+                                  font-medium text-white hover:bg-green-700
+                                  disabled:opacity-50 transition"
+                      >
+                        {isLoading ? "Saving..." : "Complete Profile"}
+                      </button>
+                    )}
+                  </div>
+
+                </div>
               </div>
-
-              {/* 🔹 Primary step navigation */}
-              <div className="flex items-center justify-between">
-
-                <button
-                  onClick={handlePrevious}
-                  disabled={step === 1}
-                  className="rounded-xl border border-gray-300 px-6 py-3
-                            font-medium text-gray-700 hover:bg-gray-50
-                            disabled:cursor-not-allowed disabled:opacity-40 transition"
-                >
-                  Previous
-                </button>
-
-                {step < totalSteps ? (
-                  <button
-                    onClick={handleNext}
-                    className="rounded-xl bg-blue-600 px-8 py-3
-                              font-medium text-white hover:bg-blue-700 transition"
-                  >
-                    Next
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleComplete}
-                    disabled={isLoading}
-                    className="rounded-xl bg-green-600 px-8 py-3
-                              font-medium text-white hover:bg-green-700
-                              disabled:opacity-50 transition"
-                  >
-                    {isLoading ? "Saving..." : "Complete Profile"}
-                  </button>
-                )}
-              </div>
-
-            </div>
-          </div>
-          {showSuccess && (
-            <div className="mb-6 rounded-xl bg-green-50 border border-green-200 p-4 text-green-800">
-              Profile saved successfully! Finding your best job matches…
-            </div>
-          )}
-    </main>
+              {showSuccess && (
+                <div className="mb-6 rounded-xl bg-green-50 border border-green-200 p-4 text-green-800">
+                  Profile saved successfully! Finding your best job matches…
+                </div>
+              )}
+        </main>
+    </>
   );
 }

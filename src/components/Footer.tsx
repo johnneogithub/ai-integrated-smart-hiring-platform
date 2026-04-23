@@ -18,11 +18,11 @@ export function Footer() {
                 className="flex items-center space-x-2 text-2xl font-medium text-blue-700 dark:text-gray-100"
               >
                 <Image
-                  src="/img/logo.svg"
-                  alt="N"
-                  width="32"
-                  height="32"
-                  className="w-8"
+                  src="/smart-hiring-platform-logo.png"
+                  alt="app-logo"
+                  width="48"
+                  height="48"
+                  className="w-24 h-24"
                 />
                 <span>Smart Hiring Platform</span>
               </Link>

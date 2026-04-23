@@ -1,15 +1,27 @@
 // components/jobs/JobCard.tsx
 
 import { JobListing } from "@/data/mockJobs";
-import { MapPin, Clock, DollarSign, Briefcase } from "lucide-react";
+import { MapPin, Clock, DollarSign } from "lucide-react";
 
-interface JobCardProps {
+type JobCardProps = {
   job: JobListing;
   onViewDetails: (job: JobListing) => void;
-}
 
-export function JobCard({ job, onViewDetails }: JobCardProps) {
-  const salaryDisplay = `$${job.salaryMin.toLocaleString()}-$${job.salaryMax.toLocaleString()}/${job.salaryType === "hour" ? "hr" : "yr"}`;
+  highlight?: boolean;
+  badge?: string;
+  tooltip?: string;
+  animate?: boolean;
+};
+
+export function JobCard({
+  job,
+  onViewDetails,
+  highlight,
+  badge,
+  tooltip,
+  animate
+}: JobCardProps) {
+  const salaryDisplay = `$${job.salaryMin.toLocaleString()}-${job.salaryMax.toLocaleString()}/${job.salaryType === "hour" ? "hr" : "yr"}`;
 
   const getEmploymentTypeColor = (type: string) => {
     switch (type) {
@@ -31,10 +43,32 @@ export function JobCard({ job, onViewDetails }: JobCardProps) {
   };
 
   return (
-    <div
-      onClick={() => onViewDetails(job)}
-      className="group cursor-pointer rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-lg hover:border-blue-300"
-    >
+      <div
+        onClick={() => onViewDetails(job)}
+        className={`relative group cursor-pointer rounded-lg border p-6 shadow-sm transition-all
+          ${highlight
+            ? "border-blue-500 ring-2 ring-blue-200 bg-blue-50"
+            : "border-gray-200 bg-white hover:shadow-lg hover:border-blue-300"}
+          ${animate ? "animate-fade-in-up" : ""}
+        `}
+      >
+      {/* Best Match Badge */}
+      {badge && (
+        <div className="absolute top-3 right-3 group/badge">
+          <span className="rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
+            {badge}
+          </span>
+
+          {tooltip && (
+            <div className="pointer-events-none absolute right-0 mt-2 w-48
+                            rounded-md bg-gray-900 px-3 py-2 text-xs text-white
+                            opacity-0 group-hover/badge:opacity-100 transition">
+              {tooltip}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Header */}
       <div className="mb-3 flex items-start justify-between">
         <div className="flex-1">
@@ -59,6 +93,7 @@ export function JobCard({ job, onViewDetails }: JobCardProps) {
         >
           {job.employmentType}
         </span>
+
         {job.applicationsOpen && (
           <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">
             Open
@@ -76,7 +111,7 @@ export function JobCard({ job, onViewDetails }: JobCardProps) {
           </span>
         </div>
 
-        {/* Location / Distance */}
+        {/* Location */}
         <div className="flex items-center gap-2">
           <MapPin className="h-4 w-4 text-red-600" />
           <div className="flex-1">
@@ -89,7 +124,7 @@ export function JobCard({ job, onViewDetails }: JobCardProps) {
           </div>
         </div>
 
-        {/* Hours / Clock */}
+        {/* Posted Date */}
         <div className="flex items-center gap-2">
           <Clock className="h-4 w-4 text-blue-600" />
           <span className="text-sm text-gray-700">

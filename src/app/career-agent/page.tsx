@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import { useChatSessions } from "./useChatSessions";
 import { isValidProfile, getDisplayName } from "@/utils/profileUtils";
 import { formatDayLabel } from "@/utils/dateUtils";
+import ModeSwitcher  from "@/components/navigation/ModeSwitcher";
 
 
 import ConversationsSidebar from "./ConversationsSidebar";
@@ -150,8 +151,6 @@ const groupedMessages = useMemo(() => {
     return acc;
   }, {} as Record<string, typeof messages>);
 }, [messages]);
-``
-
 
   // Scroll only after user sends a message
   useEffect(() => {
@@ -164,44 +163,46 @@ const groupedMessages = useMemo(() => {
   }, [shouldScrollToInput, messages.length, setShouldScrollToInput]);
 
   return (
-    <main className="flex h-[85vh] md:h-[70vh] lg:h-[80vh] bg-gray-100 overflow-hidden">
-      {sidebarOpen && (
-        <ConversationsSidebar
-          sessions={sessions}
-          activeSessionId={activeSessionId}
-          onOpenSession={openSession}
-          onDeleteCurrent={() =>
-            activeSessionId && deleteSessions([activeSessionId])
-          }
-        />
-      )}
-
-      <section className="flex flex-1 flex-col overflow-hidden">
-        <ChatHeader
-          hasProfile={hasValid}
-          onNewChat={newChat}
-          onResetProfile={resetProfile}
-          onToggleSidebar={() => setSidebarOpen((v) => !v)}
-        />
-
-        <div className="flex-1 overflow-y-auto px-4 py-2">
-          <ChatMessages
-            messages={messages}
-            isLoading={isLoading}
-            messagesEndRef={messagesEndRef}
+    <>
+      <main className="flex h-[85vh] md:h-[70vh] lg:h-[80vh] bg-gray-100 overflow-hidden">
+        {sidebarOpen && (
+          <ConversationsSidebar
+            sessions={sessions}
+            activeSessionId={activeSessionId}
+            onOpenSession={openSession}
+            onDeleteCurrent={() =>
+              activeSessionId && deleteSessions([activeSessionId])
+            }
           />
-        </div>
-        <div className="border-t bg-white">
-          <ChatInput
-            ref={inputRef}        
-            formRef={inputFormRef}
-            onSend={handleSendMessage}
+        )}
+
+        <section className="flex flex-1 flex-col overflow-hidden">
+          <ChatHeader
+            hasProfile={hasValid}
+            onNewChat={newChat}
+            onResetProfile={resetProfile}
+            onToggleSidebar={() => setSidebarOpen((v) => !v)}
           />
+
+          <div className="flex-1 overflow-y-auto px-4 py-2">
+            <ChatMessages
+              messages={messages}
+              isLoading={isLoading}
+              messagesEndRef={messagesEndRef}
+            />
           </div>
-      </section>
 
+          <div className="border-t bg-white">
+            <ChatInput
+              ref={inputRef}
+              formRef={inputFormRef}
+              onSend={handleSendMessage}
+            />
+          </div>
+        </section>
+      </main>
 
-
-    </main>
+      <ModeSwitcher />
+    </>
   );
 }

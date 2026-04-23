@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { Briefcase, UserPlus } from "lucide-react";
+import { Briefcase, UserPlus, Wand2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 /** semantic profile validation */
@@ -68,7 +68,7 @@ export default function StartPage() {
           >
             <div>
               <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100">
-                <Briefcase className="h-7 w-7 text-blue-600" />
+                <Wand2 className="h-7 w-7 text-blue-600" />
               </div>
 
               <h2 className="text-2xl font-bold text-gray-900">
@@ -152,7 +152,7 @@ export default function StartPage() {
               </h2>
 
               <p className="mt-3 text-gray-600 leading-relaxed">
-                🚛 View all open logistics and supply‑chain roles, including entry‑level,
+                View all open logistics and supply‑chain roles, including entry‑level,
                 warehouse, and professional positions — no profile required. 
               </p>
             </div>
